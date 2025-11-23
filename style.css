@@ -1,0 +1,111 @@
+/* --- BASE STYLES --- */
+html { overflow-x: hidden; }
+
+/* HIDDEN CURSOR (Restored on mobile) */
+* { cursor: none !important; }
+
+body { 
+    background-color: #0a0f1c; 
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0f1c; }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #00f2ff, #bc13fe); border-radius: 4px; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* --- CUSTOM CURSOR --- */
+#cursor {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%); transition: transform 0.1s ease; 
+    display: flex; align-items: center; justify-content: center;
+}
+#cursor::after {
+    content: '✈'; font-size: 32px; color: #00f2ff; 
+    text-shadow: 0 0 5px rgba(0, 242, 255, 0.6); opacity: 1;
+    transition: transform 0.2s ease, color 0.2s; transform: rotate(-45deg); 
+}
+#cursor.hovered::after { transform: rotate(-45deg) scale(1.2); color: #FFD700; text-shadow: 0 0 5px rgba(255, 215, 0, 0.6); }
+
+/* --- GLOBE --- */
+#globe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; opacity: 0.5; pointer-events: none; }
+
+/* --- GLASS EFFECTS --- */
+.glass { background: rgba(17, 24, 39, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.1); }
+.section-bg { 
+    background-color: rgba(10, 15, 28, 0.15); 
+    backdrop-filter: blur(2px); 
+    position: relative; z-index: 10; 
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+}
+.gold-text { text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); }
+
+/* --- STAMPS --- */
+.visa-stamp {
+    position: absolute; top: 40%; right: 10%;
+    transform: translate(0, -50%) scale(3) rotate(10deg);
+    border: 4px double; padding: 0.5rem 1rem;
+    font-family: 'Space Grotesk', monospace; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 20; pointer-events: none; mix-blend-mode: plus-lighter;
+}
+.flip-card-container:hover .visa-stamp { opacity: 1; transform: translate(0, -50%) scale(1) rotate(-15deg); }
+.stamp-green { color: #22c55e; border-color: #22c55e; box-shadow: 0 0 15px rgba(34, 197, 94, 0.4), inset 0 0 10px rgba(34, 197, 94, 0.2); text-shadow: 0 0 5px rgba(34, 197, 94, 0.8); }
+.stamp-purple { color: #bc13fe; border-color: #bc13fe; box-shadow: 0 0 15px rgba(188, 19, 254, 0.4), inset 0 0 10px rgba(188, 19, 254, 0.2); text-shadow: 0 0 5px rgba(188, 19, 254, 0.8); }
+.stamp-gold { color: #FFD700; border-color: #FFD700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.2); text-shadow: 0 0 5px rgba(255, 215, 0, 0.8); }
+.stamp-white { color: #fff; border-color: #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2); text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); }
+
+/* --- FLIP CARDS --- */
+.flip-card-container { perspective: 1000px; position: relative; z-index: 5; min-height: 280px; }
+.flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+.flip-card-container:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+    position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    background: rgba(17, 24, 39, 0.7); border: 1px solid rgba(0, 242, 255, 0.3);
+    border-radius: 1rem; padding: 2rem; 
+    box-shadow: 0 0 8px rgba(0, 242, 255, 0.1);
+    display: flex; flex-direction: column; justify-content: center;
+    transition: background 0.2s, border-color 0.2s; backdrop-filter: blur(5px);
+}
+.flip-card-back { transform: rotateY(180deg); background: rgba(10, 15, 28, 0.9); border-color: #bc13fe; justify-content: flex-start; overflow: hidden; }
+
+/* --- TILT --- */
+.tilt-card { transition: transform 0.1s ease; transform-style: preserve-3d; }
+
+/* --- TESTIMONIALS --- */
+.testimonial-scroller { overflow-x: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+.testimonial-wrapper { display: flex; width: max-content; animation: scroll 50s linear infinite; gap: 1.5rem; padding-right: 1.5rem;}
+.testimonial-scroller:hover .testimonial-wrapper { animation-play-state: paused; }
+.testimonial-card { width: 350px; background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(4px); border: 1px solid rgba(55, 65, 81, 0.5); border-radius: 1rem; padding: 1.5rem; flex-shrink: 0;}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* --- CALCULATOR --- */
+input[type=range] { -webkit-appearance: none; background: transparent; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #FFD700; cursor: pointer; margin-top: -8px; box-shadow: 0 0 5px #FFD700; }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #374151; border-radius: 2px; }
+.toggle-option.active .check-box i { opacity: 1; }
+.check-box i { transition: opacity 0.2s; }
+
+/* --- NEWS SLIDER --- */
+#news-slider { display: flex; width: 200%; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+#news-slider.details-active { transform: translateX(-50%); }
+.news-slide { width: 50%; flex-shrink: 0; }
+
+/* --- MODAL --- */
+.goal-option { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.4; transform: scale(0.9); cursor: pointer; border: none; outline: none; }
+#goal-work.active { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.6)); }
+#goal-work.active span.font-bold { color: #f59e0b; text-shadow: 0 0 4px rgba(245, 158, 11, 0.4); }
+#goal-study.active { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7)); }
+#goal-study.active span.font-bold { color: #ffffff; text-shadow: 0 0 4px rgba(255, 255, 255, 0.4); }
+#goal-visit.active { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(0, 242, 255, 0.6)); }
+#goal-visit.active span.font-bold { color: #00f2ff; text-shadow: 0 0 4px rgba(0, 242, 255, 0.4); }
+
+/* --- MOBILE --- */
+@media (hover: none) and (pointer: coarse) {
+    #cursor { display: none !important; }
+    * { cursor: auto !important; } 
+    .tilt-card { transform: none !important; }
+}
