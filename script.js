@@ -146,16 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Tilt Cards
-    const cards = document.querySelectorAll('.tilt-card');
-    document.addEventListener('mousemove', (e) => {
-        const x = (window.innerWidth / 2 - e.clientX) / 30;
-        const y = (window.innerHeight / 2 - e.clientY) / 30;
-        cards.forEach(card => {
-            const speed = card.getAttribute('data-speed') || 1;
-            card.style.transform = `rotateY(${x * speed * 0.5}deg) rotateX(${y * speed * 0.5}deg) translateZ(${speed * 10}px)`;
-        });
-    });
+   
 
     // Flip Cards Spotlight
     document.querySelectorAll('.flip-card-container').forEach(c => {
@@ -328,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mockNewsData = [
         { id: 1, category: 'KSA Updates', categoryColor: 'text-brand-neon', title: 'Vision 2030: New Opportunities', summary: 'Learn about the new projects and visa reforms opening up the Kingdom.', imageUrl: 'https://placehold.co/600x400/1e3a8a/ffffff?text=KSA+Vision', sourceUrl: 'https://www.vision2030.gov.sa/en' },
         { id: 2, category: 'UAE Updates', categoryColor: 'text-brand-purple', title: 'UAE Golden Visa Guide', summary: 'The coveted 10-year Golden Visa has new categories for professionals.', imageUrl: 'https://placehold.co/600x400/065f46/ffffff?text=UAE+Golden', sourceUrl: 'https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa' },
-        { id: 3, category: 'Travel Tips', categoryColor: 'text-brand-gold', title: '5 Visa Application Mistakes', summary: 'A simple error can lead to costly delays. Avoid these pitfalls.', imageUrl: 'https://placehold.co/600x400/4b5563/ffffff?text=Travel+Tips', sourceUrl: '#' }
+        { id: 3, category: 'Travel Tips', categoryColor: 'text-brand-gold', title: '5 Visa Application Mistakes', summary: 'A simple error can lead to costly delays. Avoid these pitfalls.', imageUrl: 'https://placehold.co/600x400/4b5563/ffffff?text=Travel+Tips', sourceUrl: 'https://ifza.com/en/uae-visa-common-application-mistakes/' }
     ];
     const newsGrid = document.getElementById('news-grid');
     const sliderEl = document.getElementById('news-slider');
@@ -368,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sliderEl.classList.remove('details-active');
     });
 
-    // Firebase
+    //  backend part Firebase-by sam
     const firebaseConfig = { apiKey: "AIzaSyDt0_VrU7S96QTCRxxUF2U5MAg1XOJRQUU", authDomain: "dweldubai-website.firebaseapp.com", projectId: "dweldubai-website", storageBucket: "dweldubai-website.firebasestorage.app", messagingSenderId: "955916762022", appId: "1:955916762022:web:13726621ff4f80b856ed67", measurementId: "G-WF4E3DWKWY" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore(); 
@@ -406,6 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+//backend ends
+
 
 // Global scope for HTML onclick
 window.triggerScan = function() {
